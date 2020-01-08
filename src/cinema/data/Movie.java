@@ -10,6 +10,11 @@ public class Movie {
 		
 	}
 	
+	public Movie(String title, int releaseDate) {
+		this(title, releaseDate, 0);
+		
+	}
+	
 	public Movie(String title, int releaseDate, int duration) {
 		super();
 		this.title = title;
@@ -46,7 +51,43 @@ public class Movie {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	 
+	
+	@Override
+	public String toString() {
+		return  title + " (" + releaseDate + (duration == 0 ? "" : ", " + duration + "mn") + ")";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + releaseDate;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Movie other = (Movie) obj;
+		
+		if (releaseDate != other.releaseDate)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+		 
+	
 }
 
 
