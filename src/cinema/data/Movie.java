@@ -7,6 +7,7 @@ public class Movie {
 	private String title;
 	private int releaseDate;
 	private int duration;
+	private Person director;
 	 
 	public Movie() {
 		
@@ -18,12 +19,18 @@ public class Movie {
 	}
 	
 	public Movie(String title, int releaseDate, int duration) {
+		this(title, releaseDate, duration, null);
+	}
+	
+	
+
+	public Movie(String title, int releaseDate, int duration, Person director) {
 		super();
 		this.title = Objects.requireNonNull(title);
 		this.releaseDate = releaseDate;
 		this.duration = duration;
+		this.director = director;
 	}
-
 
 	public String getTitle() {
 		return title;
@@ -54,6 +61,15 @@ public class Movie {
 		this.duration = duration;
 	}
 	
+	
+	public Person getDirector() {
+		return director;
+	}
+
+	public void setDirector(Person director) {
+		this.director = director;
+	}
+
 	@Override
 	public String toString() {
 		return  title + " (" + releaseDate + (duration == 0 ? "" : ", " + duration + "mn") + ")";
@@ -61,11 +77,7 @@ public class Movie {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + releaseDate;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+		return Objects.hash(title, releaseDate);
 	}
 
 	@Override
