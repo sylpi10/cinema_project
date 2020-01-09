@@ -1,10 +1,12 @@
 package test.cinema.data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import cinema.data.Movie;
+import cinema.data.Person;
 
 class TestMovie{
 
@@ -75,6 +77,25 @@ class TestMovie{
 		Object obj = chaos1;
 		Movie movie = (Movie) obj;
 		System.out.println(movie.getTitle());
+	}
+
+	@Test
+	void testCreateData() {
+		Movie joker = new Movie("Joker", 2019);
+		
+		//add directors
+		  // todd phillips
+		Person todd = new Person("Todd Phillips");
+		joker.setDirector(todd);
+		System.out.println(joker + ", directed by " + joker.getDirector());
+		
+		  //clint eastwood
+		Person clint = new Person("Clint Eastwood", LocalDate.of(1930, 05, 31));
+		System.out.println(clint + " is " + clint.getAge().getAsInt() + " years old");
+		Movie movieGT = new Movie("Gran Torino", 2008, 116, clint);
+		System.out.println(movieGT);
+		Movie movieUnforgiven = new Movie("Unforgiven", 1992, clint);
+		System.out.println(movieUnforgiven+ ", directed by " + movieUnforgiven.getDirector());
 	}
 	
 

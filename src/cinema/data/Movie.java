@@ -22,6 +22,9 @@ public class Movie {
 		this(title, releaseDate, duration, null);
 	}
 	
+	public Movie(String title, int releaseDate, Person director) {
+		this(title, releaseDate, 0, director);
+	}
 	
 
 	public Movie(String title, int releaseDate, int duration, Person director) {
@@ -94,14 +97,6 @@ public class Movie {
 		return this.title.equals(other.title)
 				&& this.releaseDate == other.releaseDate;
 		
-//		if (releaseDate != other.releaseDate)
-//			return false;
-//		if (title == null) {
-//			if (other.title != null)
-//				return false;
-//		} else if (!title.equals(other.title))
-//			return false;
-//		return true;
 	}
 		 
 	
