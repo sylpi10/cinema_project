@@ -51,6 +51,25 @@ class TestMovie{
 	}
 
 	@Test
+	void testEqualsNull() {
+		Movie chaos1 = new Movie("Chaos", 2005);
+		Movie chaosNull = null;
+		System.out.println(chaos1 == chaosNull);
+		System.out.println(chaos1.equals(chaosNull));
+		System.out.println(chaosNull.equals(chaos1));
+	}
+
+	@Test
+	void testEqualsTitleNull() {
+		Movie chaos1 = new Movie("Chaos", 2005);
+		Movie movieTitleNull = new Movie(null, 2005);
+		System.out.println(chaos1 == movieTitleNull);
+		System.out.println(movieTitleNull == chaos1);
+		System.out.println(chaos1.equals(movieTitleNull));
+		System.out.println(movieTitleNull.equals(chaos1));
+	}
+
+	@Test
 	void testMovieAsObject() {
 		Movie chaos1 = new Movie("Chaos", 2005);
 		Object obj = chaos1;

@@ -1,5 +1,7 @@
 package cinema.data;
 
+import java.util.Objects;
+
 public class Movie {
 	// attribute
 	private String title;
@@ -17,7 +19,7 @@ public class Movie {
 	
 	public Movie(String title, int releaseDate, int duration) {
 		super();
-		this.title = title;
+		this.title = Objects.requireNonNull(title);
 		this.releaseDate = releaseDate;
 		this.duration = duration;
 	}
@@ -29,7 +31,7 @@ public class Movie {
 
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = Objects.requireNonNull(title);
 	}
 
 
@@ -67,7 +69,7 @@ public class Movie {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) {	
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -76,15 +78,18 @@ public class Movie {
 			return false;
 		
 		Movie other = (Movie) obj;
+
+		return this.title.equals(other.title)
+				&& this.releaseDate == other.releaseDate;
 		
-		if (releaseDate != other.releaseDate)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+//		if (releaseDate != other.releaseDate)
+//			return false;
+//		if (title == null) {
+//			if (other.title != null)
+//				return false;
+//		} else if (!title.equals(other.title))
+//			return false;
+//		return true;
 	}
 		 
 	
