@@ -6,7 +6,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,9 +41,11 @@ class TestCinema {
 		Collections.addAll(movies, 
 				new Movie("Unforgiven", 1992, 116, clint),
 				new Movie("Interstallar", 2014, 120),
-				new Movie("Gran Torino", 1992, clint),
+				new Movie("Gran Torino", 2009, clint),
 				new Movie("Joker", 2019, todd ),
-				new Movie("Hungover", 2009, 100, todd)
+				new Movie("Hangover", 2009, 100, todd),
+				new Movie("American Sniper", 2016, 140, clint)
+				
 				);
 	}
 	
@@ -54,14 +60,43 @@ class TestCinema {
 	
 	@Test
 	void displayMovie() {
+		// forI loop
+		System.out.println("with for : ");
 		for (int i = 0; i < movies.size(); i++) {
 			var movie = movies.get(i);
-			System.out.println("with for : " + movie + ", directed by " + movie.getDirector());
+			System.out.println("     " + movie + ", directed by " + movie.getDirector());
 		}
-		System.out.println("");
+		
+		// foreach
+		System.out.println("\nwith foreach : ");
 		for (Movie movie : movies) {
-			System.out.println("with foreach : " + movie + ", directed by " + movie.getDirector() );
+			System.out.println("    " + movie + ", directed by " + movie.getDirector() );
 		}
+	}
+	
+	@Test
+	void totalDurationClintMovies() {
+		int totalDuration = 0;
+		for (Movie movie : movies) {
+			
+			if (Objects.nonNull(movie.getDirector()) && movie.getDirector().getName() == "Clint Eastwood") {
+				totalDuration += movie.getDuration();
+			}
+		}
+		System.out.println("total duration : " + totalDuration);
+	}
+	
+	@Test
+	void testSortedMovies() {
+		SortedSet<Movie> sortedMovies = new TreeSet<>((m1, m2) -> -1);
+		sortedMovies.addAll(movies);
+		System.out.println(movies);
+	}
+
+	@Test
+	void testSortMovies() {
+		Collections.sort(movies, Comparator.comparing(Movie::getReleaseDate).thenComparing(Movie::getTitle));
+		System.out.println(movies);
 	}
 
 }

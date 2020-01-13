@@ -59,7 +59,7 @@ public class Person {
 	
 	@Override
 	public String toString() {
-		return "Person: " + name + " (" + Objects.toString(birthDate, "unknown")+ ")";
+		return name + " (" + Objects.toString(birthDate, "unknown")+ ")";
 	}
 	
 	// TODO : equals + hashCode
