@@ -88,7 +88,10 @@ class TestCinema {
 	
 	@Test
 	void testSortedMovies() {
-		SortedSet<Movie> sortedMovies = new TreeSet<>((m1, m2) -> -1);
+		SortedSet<Movie> sortedMovies = new TreeSet<>(
+				Comparator.comparing(Movie::getReleaseDate, Comparator.reverseOrder())
+				.thenComparing(Movie::getTitle));
+//				(m1, m2) -> -1);
 		sortedMovies.addAll(movies);
 		System.out.println(movies);
 	}
