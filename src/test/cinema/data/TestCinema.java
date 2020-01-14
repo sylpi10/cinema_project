@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.SortedSet;
@@ -194,5 +195,20 @@ class TestCinema {
 		System.out.println(movies);
 	}
 	
+	///// MAP ////
+	@Test
+	void nbMovieByYear() {
+		var res = movies.stream()
+		.collect(Collectors.groupingBy(Movie::getReleaseDate, Collectors.counting()));
+		System.out.println(res);
+	}
+	
+	@Test
+	void nbMovieByDirector() {
+		var res = movies.stream()
+				.filter(m -> Objects.nonNull(m.getDirector()))
+				.collect(Collectors.groupingBy(Movie::getDirector, Collectors.counting()));
+		System.out.println(res);
+	}
 	
 }
