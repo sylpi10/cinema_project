@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.SortedSet;
@@ -44,7 +45,7 @@ class TestCinema {
 				new Movie("Gran Torino", 2009, clint),
 				new Movie("Joker", 2019, todd ),
 				new Movie("Hangover", 2009, 100, todd),
-				new Movie("American Sniper", 2016, 140, clint)
+				new Movie("American Sniper", 2014, 133, clint)
 				
 				);
 	}
@@ -85,6 +86,17 @@ class TestCinema {
 		}
 		System.out.println("total duration : " + totalDuration);
 	}
+
+	@Test
+	void totalDurationClintMoviesStream() {
+		var clint = persons.get(3);
+		int totalDuration = movies.stream()
+				.filter(m -> clint.equals(m.getDirector()))
+				.mapToInt(Movie::getDuration)
+//				.forEach(System.out::println);
+				.sum();
+		System.out.println("total duration : " + totalDuration);
+	}
 	
 	@Test
 	void testSortedMovies() {
@@ -101,5 +113,6 @@ class TestCinema {
 		Collections.sort(movies, Comparator.comparing(Movie::getReleaseDate).thenComparing(Movie::getTitle));
 		System.out.println(movies);
 	}
-
+	
+	
 }
