@@ -16,7 +16,7 @@ class testPerson {
 		System.out.println(phoenix + " : " + phoenix.getAge());
 		Person darmon = new Person("Gérard Darmon", LocalDate.of(1948, 02, 29));
 		System.out.println(darmon + " : " + darmon.getAge());
-		Person todd = new Person("Todd Phillips");
+		Person todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));
 		System.out.println(todd + " : " + todd.getAge());
 	}
 

@@ -35,9 +35,8 @@ class TestCinema {
 		Collections.addAll(persons, 
 				 new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28)),
 				 new Person("Gérard Darmon", LocalDate.of(1948, 02, 29)),
-				 new Person("Todd Phillips"),
 				 new Person("Clint Eastwood", LocalDate.of(1930, 05, 31)),
-				 new Person("Todd Phillips")
+				 new Person("Todd Phillips", LocalDate.of(1970, 12, 20))
 				);
 		
 		var clint =  persons.get(3);		
@@ -205,10 +204,27 @@ class TestCinema {
 	
 	@Test
 	void nbMovieByDirector() {
-		var res = movies.stream()
+		var nbMovieByDirector = movies.stream()
 				.filter(m -> Objects.nonNull(m.getDirector()))
 				.collect(Collectors.groupingBy(Movie::getDirector, Collectors.counting()));
-		System.out.println(res);
+		System.out.println(nbMovieByDirector);
 	}
 	
+	@Test
+	void testFimo() {
+		var filmographies = movies.stream()
+				.filter(m -> Objects.nonNull(m.getDirector()))
+				.collect(Collectors.groupingBy(Movie::getDirector,
+						 Collectors.toCollection(
+								 ()-> new TreeSet<>(Comparator.comparing(Movie::getReleaseDate,
+										 Comparator.reverseOrder())))));
+		System.out.println(filmographies);
+	}
+	
+	@Test
+	void directorByDecade() {
+		var pers = persons.stream()
+		.collect(Collectors.groupingBy((Person p) -> p.getBirthDate().getYear() / 10));
+		System.out.println(pers);
+	}
 }
