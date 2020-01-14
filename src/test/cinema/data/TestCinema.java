@@ -116,6 +116,24 @@ class TestCinema {
 	}
 	
 	@Test
+	void testTitlesAvengers() {
+		var joinedTitles = movies.stream()
+				.filter(m -> m.getTitle().contains("Avengers"))
+				.map(Movie::getTitle)
+				.collect(Collectors.joining(" -- "));
+		System.out.println(joinedTitles);
+	}
+	
+	@Test
+	void testLimit() {
+		movies.stream()
+				.filter((Movie m) -> m.getReleaseDate() > 2000)
+				.limit(3)
+				.forEach(System.out::println);
+	}
+	
+	
+	@Test
 	void testFirstYearAvengers() {
 		OptionalInt firstYear = movies.stream()
 				.filter(m -> m.getTitle().contains("Avengers"))
@@ -134,6 +152,7 @@ class TestCinema {
 		System.out.println("last year:" + stats.getMax());
 		System.out.println(stats.toString());
 	}
+	
 	
 	@Test
 	void testSortedMovies() {
