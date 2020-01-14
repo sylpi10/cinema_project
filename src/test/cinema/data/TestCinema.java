@@ -10,11 +10,15 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.manipulation.Sorter;
 
 import cinema.data.Movie;
 import cinema.data.Person;
@@ -45,8 +49,12 @@ class TestCinema {
 				new Movie("Gran Torino", 2009, clint),
 				new Movie("Joker", 2019, todd ),
 				new Movie("Hangover", 2009, 100, todd),
-				new Movie("American Sniper", 2014, 133, clint)
-				
+				new Movie("American Sniper", 2014, 133, clint),
+				new Movie("Avengers", 2012, 140),
+				new Movie("Avengers, Utron", 2016, 142),
+				new Movie("Captain Marvel", 2018, 126),
+				new Movie("Avengers, Endgame", 2019, 144),
+				new Movie("Avengers, Infinity war", 2017, 133)
 				);
 	}
 	
@@ -96,6 +104,35 @@ class TestCinema {
 //				.forEach(System.out::println);
 				.sum();
 		System.out.println("total duration : " + totalDuration);
+	}
+	
+	@Test
+	void orderedListAvengersStream() {
+		var avengerOrdered = movies.stream()
+				.filter(m -> m.getTitle().contains("Avengers"))
+				.collect(Collectors.toCollection(()->new TreeSet<>(
+					     Comparator.comparing(Movie::getReleaseDate))));
+		System.out.println(avengerOrdered);
+	}
+	
+	@Test
+	void testFirstYearAvengers() {
+		OptionalInt firstYear = movies.stream()
+				.filter(m -> m.getTitle().contains("Avengers"))
+				.mapToInt(Movie::getReleaseDate)
+				.min();
+		System.out.println(firstYear);
+	}
+	
+	@Test
+	void testStatsAvengers() {
+		var stats = movies.stream()
+				.filter(m -> m.getTitle().contains("Avengers"))
+				.mapToInt(Movie::getReleaseDate)
+				.summaryStatistics();
+		System.out.println("first year:" + stats.getMin());
+		System.out.println("last year:" + stats.getMax());
+		System.out.println(stats.toString());
 	}
 	
 	@Test
