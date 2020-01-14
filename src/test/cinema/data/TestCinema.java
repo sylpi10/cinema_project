@@ -51,9 +51,9 @@ class TestCinema {
 				new Movie("Hangover", 2009, 100, todd),
 				new Movie("American Sniper", 2014, 133, clint),
 				new Movie("Avengers", 2012, 140),
-				new Movie("Avengers, Utron", 2016, 142),
+				new Movie("Avengers, Age of Ultron", 2016, 142),
 				new Movie("Captain Marvel", 2018, 126),
-				new Movie("Avengers, Endgame", 2019, 144),
+				new Movie("Avengers, Endgame", 2019, 181),
 				new Movie("Avengers, Infinity war", 2017, 133)
 				);
 	}
@@ -95,6 +95,7 @@ class TestCinema {
 		System.out.println("total duration : " + totalDuration);
 	}
 
+	////STREAM --- FILTER
 	@Test
 	void totalDurationClintMoviesStream() {
 		var clint = persons.get(3);
@@ -151,6 +152,29 @@ class TestCinema {
 		System.out.println("first year:" + stats.getMin());
 		System.out.println("last year:" + stats.getMax());
 		System.out.println(stats.toString());
+	}
+	
+	@Test
+	void testNbMoviesLonger120() {
+		long countMovies = movies.stream()
+				.filter((Movie m) -> m.getDuration() >= 120)
+				.count();
+		System.out.println(countMovies + " movies longer than 2h");
+	}
+
+	@Test
+	void longestTitle() {
+		var maxLength = movies.stream()
+				.map(Movie::getTitle)
+				.mapToInt(String::length)
+				.max()
+				.getAsInt();
+		System.out.println(maxLength + " characters");
+		var maxTitles = movies.stream()
+			.map(Movie::getTitle)
+			.filter(t ->t.length() == maxLength)
+			.collect(Collectors.toList());
+		System.out.println(maxTitles);
 	}
 	
 	
