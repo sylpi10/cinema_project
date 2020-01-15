@@ -241,4 +241,12 @@ class TestCinema {
 		.collect(Collectors.groupingBy((Person p) -> p.getBirthDate().getYear() / 10));
 		System.out.println(pers);
 	}
+	
+	@Test
+	void testParasite() {
+		movies.stream()
+		.filter(m -> m.getTitle().equals("Parasite"))
+		.findFirst()
+		.ifPresent(System.out::println);
+	}
 }
