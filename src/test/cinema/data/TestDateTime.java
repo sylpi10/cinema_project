@@ -3,7 +3,10 @@ package test.cinema.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -49,14 +52,33 @@ class TestDateTime {
 		Arrays.stream(
 				Locale.getAvailableLocales())
 				.filter(l -> l.getCountry().equals("IN"))
-				.forEach(l-> System.out.println(date.format(
-						DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy", l)
-						)));
+				.map(l -> date.format(
+						DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy", l)))
+				.forEach(System.out::println);
 		
 //		var format1 = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy", new Locale("kok", "in"));
 //		var format2 = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy", new Locale("ks", "in"));
 //		System.out.println("\n" + date.format(format1));
 //		System.out.println(date.format(format2));
+		
+	}
+	
+	@Test
+	void aroundTheWorld() {
+		
+		
+		var format1 = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy, kk:mm:ss");
+		var places = List.of(
+				 LocalDateTime.now(),
+				 LocalDateTime.now(ZoneId.of("Pacific/Midway")),
+				 LocalDateTime.now(ZoneId.of("Pacific/Auckland"))
+				);
+		
+		places.forEach(p -> System.out.println(format1.format(p)));
+//		places.forEach(p -> System.out.println(p.format(format1)));
+		
+		System.out.println("");
+		System.out.println(format1.format(LocalDateTime.now()));
 		
 	}
 }
