@@ -63,10 +63,10 @@ class TestCinema {
 		movies.get(3).addActor(persons.get(0));
 		movies.get(0).addAllActors(persons.get(5), persons.get(2), persons.get(4));
 		var actorsParasite = List.of(
-					new Person("Kang-ho Song"),
-					new Person("Yeo-jeong Jo"),
-					new Person("Wook-sik Choi"),
-					new Person("Jeon-eun Jee")
+					new Person("Kang-ho Song", LocalDate.of(1988, 10, 06)),
+					new Person("Yeo-jeong Jo", LocalDate.of(1984, 02, 24)),
+					new Person("Wook-sik Choi", LocalDate.of(1994, 06, 02)),
+					new Person("Jeon-eun Jee", LocalDate.of(1955, 11, 12))
 				);
 		persons.addAll(actorsParasite);
 		movies.get(11).addAllActors(actorsParasite);
@@ -248,5 +248,27 @@ class TestCinema {
 		.filter(m -> m.getTitle().equals("Parasite"))
 		.findFirst()
 		.ifPresent(System.out::println);
+	}
+	
+	@Test
+	void testParasiteStream() {
+		var movie = movies.get(11);
+		var actors = movie.streamActors()
+		.map(Person::getName)
+		.collect(Collectors.joining(", "));
+
+		System.out.println(actors);
+		
+	}
+
+	@Test
+	void testParasiteIterable() {
+		var movie = movies.get(11);
+		for (var it =  movie.iteratorActor(); it.hasNext();) {
+			var actor = it.next();
+			System.out.println(actor);
+		}
+		
+		
 	}
 }
