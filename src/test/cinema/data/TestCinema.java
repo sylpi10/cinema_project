@@ -36,7 +36,9 @@ class TestCinema {
 				 new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28)),
 				 new Person("Gérard Darmon", LocalDate.of(1948, 02, 29)),
 				 new Person("Clint Eastwood", LocalDate.of(1930, 05, 31)),
-				 new Person("Todd Phillips", LocalDate.of(1970, 12, 20))
+				 new Person("Todd Phillips", LocalDate.of(1970, 12, 20)),
+				 new Person("Gene Hackman", LocalDate.of(1930, 06, 14)),
+				 new Person("Morgan Freeman", LocalDate.of(1937, 02, 12))
 				);
 		
 		var clint =  persons.get(3);		
@@ -54,8 +56,20 @@ class TestCinema {
 				new Movie("Avengers, Age of Ultron", 2016, 142),
 				new Movie("Captain Marvel", 2018, 126),
 				new Movie("Avengers, Endgame", 2019, 181),
-				new Movie("Avengers, Infinity war", 2017, 133)
+				new Movie("Avengers, Infinity war", 2017, 133),
+				new Movie("Parasite", 2019, 133)
 				);
+		
+		movies.get(3).addActor(persons.get(0));
+		movies.get(0).addAllActors(persons.get(5), persons.get(2), persons.get(4));
+		var actorsParasite = List.of(
+					new Person("Kang-ho Song"),
+					new Person("Yeo-jeong Jo"),
+					new Person("Wook-sik Choi"),
+					new Person("Jeon-eun Jee")
+				);
+		persons.addAll(actorsParasite);
+		movies.get(11).addAllActors(actorsParasite);
 	}
 	
 	@Test

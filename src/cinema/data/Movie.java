@@ -1,5 +1,10 @@
 package cinema.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Movie {
@@ -8,6 +13,7 @@ public class Movie {
 	private int releaseDate;
 	private int duration;
 	private Person director;
+	private List<Person> actors;
 	 
 	public Movie() {
 		
@@ -33,6 +39,7 @@ public class Movie {
 		this.releaseDate = releaseDate;
 		this.duration = duration;
 		this.director = director;
+		this.actors = new ArrayList<>();
 	}
 
 	public String getTitle() {
@@ -72,6 +79,22 @@ public class Movie {
 	public void setDirector(Person director) {
 		this.director = director;
 	}
+	
+	
+	///list persons methods ///
+	public void addActor(Person actor) {
+		this.actors.add(actor);
+	}
+	
+
+	public void addAllActors(Collection<? extends Person> actors) {
+		this.actors.addAll(actors);
+	}
+	
+	public void addAllActors(Person... actors) {
+		this.addAllActors(Arrays.asList(actors));
+	}
+	
 
 	@Override
 	public String toString() {
@@ -98,7 +121,8 @@ public class Movie {
 				&& this.releaseDate == other.releaseDate;
 		
 	}
-		 
+
+
 	
 }
 
